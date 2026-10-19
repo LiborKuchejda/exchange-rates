@@ -1,0 +1,16 @@
+{
+  "name": "fastify",
+  "type": "module",
+  "scripts": {
+    "dev": "npx tsx watch server.ts",
+    "start": "node server.ts"
+  },
+  "dependencies": {
+    "fastify": "5.12.7"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.17",
+    "tsx": "^4.23.15",
+    "typescript": "5.8.3"
+  }
+}
