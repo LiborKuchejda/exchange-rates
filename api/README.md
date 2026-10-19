@@ -1,3 +1,5 @@
+# API to wrap CNB daily.txt   
+
 To develop locally:
 
 ```
@@ -5,7 +7,9 @@ npm install
 npm run dev
 ```
 
+To get daily rates:
+
 ```
-open http://localhost:3001
+curl localhost:3001/api/rates/daily
 ```
 
