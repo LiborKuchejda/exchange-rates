@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "noEmit": true,
     "target": "esnext",
-    "module": "nodenext",
+    "module": "NodeNext",
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "skipLibCheck": true,
     "rewriteRelativeImportExtensions": true,
     "verbatimModuleSyntax": true,
-    "outDir": "dist",  
   },
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

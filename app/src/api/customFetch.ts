@@ -1,9 +1,10 @@
-export class ApiError<T extends { message?: string } = { message?: string }> extends Error {
+export class ApiError<T = unknown> extends Error {
     constructor(
         public readonly status: number,
         public readonly body?: T,
     ) {
-        super(`HTTP ${status}: ${body?.message ?? "Networking problem"}`);
+        const message = (body as { message?: unknown } | undefined)?.message;
+        super(`HTTP ${status}: ${typeof message === "string" ? message : "Networking problem"}`);
         this.name = "ApiError";
     }
 }
@@ -13,9 +14,9 @@ export const customFetch = async <T>(url: string, options: RequestInit): Promise
 
     const text = await res.text();
     const body = text ? JSON.parse(text) : undefined;
-    
+
     if (!res.ok) {
-        console.error("customFetch:", {status: res.status, text});
+        console.error("customFetch:", { status: res.status, text });
         throw new ApiError(res.status, body);
     }
 
