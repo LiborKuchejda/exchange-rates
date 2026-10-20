@@ -23,22 +23,24 @@ app.register(rateLimit, {
   timeWindow: "1 minute",
 });
 
-app.register(swagger, {
-  openapi: {
-    openapi: "3.1.1",
-    info: {
-      title: "Exchange Rates API",
-      description: "Daily CNB exchange rates",
-      version: "1.0.0",
+if (process.env.NODE_ENV !== "production") {  
+  app.register(swagger, {
+    openapi: {
+      openapi: "3.1.1",
+      info: {
+        title: "Exchange Rates API",
+        description: "Daily CNB exchange rates",
+        version: "1.0.0",
+      },
     },
-  },
-  transform: jsonSchemaTransform,
-  transformObject: jsonSchemaTransformObject,
-});
+    transform: jsonSchemaTransform,
+    transformObject: jsonSchemaTransformObject,
+  });
 
-app.register(swaggerUi, {
-  routePrefix: "/docs",
-});
+  app.register(swaggerUi, {
+    routePrefix: "/docs",
+  });
+}
 
 app.register(ratesRoutes, { prefix: "api/rates/" });
 
@@ -50,5 +52,3 @@ app.listen({ port: Number(process.env.PORT) || 3001, host: "0.0.0.0" })
     app.log.error(err);
     process.exit(1);
   });
-
-export default app;
