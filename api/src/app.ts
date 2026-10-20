@@ -50,3 +50,5 @@ app.listen({ port: Number(process.env.PORT) || 3001, host: "0.0.0.0" })
     app.log.error(err);
     process.exit(1);
   });
+
+export default app;
