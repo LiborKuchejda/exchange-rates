@@ -1,7 +1,7 @@
-import Fastify, { type FastifyError } from 'fastify';
+import Fastify from 'fastify';
 import rateLimit from "@fastify/rate-limit";
-import swagger from "@fastify/swagger";
-import swaggerUi from "@fastify/swagger-ui";
+// import swagger from "@fastify/swagger";
+// import swaggerUi from "@fastify/swagger-ui";
 import {
   jsonSchemaTransform,
   jsonSchemaTransformObject,
@@ -23,22 +23,22 @@ app.register(rateLimit, {
   timeWindow: "1 minute",
 });
 
-app.register(swagger, {
-  openapi: {
-    openapi: "3.1.1",
-    info: {
-      title: "Exchange Rates API",
-      description: "Daily CNB exchange rates",
-      version: "1.0.0",
-    },
-  },
-  transform: jsonSchemaTransform,
-  transformObject: jsonSchemaTransformObject,
-});
+// app.register(swagger, {
+//   openapi: {
+//     openapi: "3.1.1",
+//     info: {
+//       title: "Exchange Rates API",
+//       description: "Daily CNB exchange rates",
+//       version: "1.0.0",
+//     },
+//   },
+//   transform: jsonSchemaTransform,
+//   transformObject: jsonSchemaTransformObject,
+// });
 
-app.register(swaggerUi, {
-  routePrefix: "/docs",
-});
+// app.register(swaggerUi, {
+//   routePrefix: "/docs",
+// });
 
 app.register(ratesRoutes, { prefix: "/rates/" });
 
