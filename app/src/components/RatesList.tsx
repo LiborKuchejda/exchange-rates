@@ -1,8 +1,9 @@
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { getDailyRates } from "../api/rates";
+import { getDailyRates } from "../api/gen";
 
 export function RatesList() {
     const { data } = useSuspenseQuery({ queryKey: ["rates"], queryFn: getDailyRates });
+    console.log("PIKACU:", data);
 
     return (
         <ul>

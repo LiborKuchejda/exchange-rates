@@ -1,4 +1,4 @@
-import { parse } from 'date-fns';
+import { parse, format } from 'date-fns';
 
 // const CNB_API_URL = 'https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing';
 const CNB_API_URL = '/api/central-bank-exchange-rate-fixing';
@@ -14,7 +14,7 @@ export class HttpError extends Error {
 }
 
 export type DailyRates = {
-    date: Date;
+    date: string;
     rates: Rate[]
 }
 
@@ -43,6 +43,8 @@ function parseDailyRates(text: string): DailyRates {
         throw new Error("Invalid response format");
     }
 
+    const date = parse(dateLine, 'dd.MM.yyyy', new Date());
+
     const rates = dataLines
         .filter(Boolean)
         .map((line): Rate => {
@@ -54,7 +56,7 @@ function parseDailyRates(text: string): DailyRates {
         );
 
     return {
-        date: parse(dateLine, 'dd.MM.yyyy', new Date()),
+        date: format(date, "yyyy-MM-dd"),
         rates
     };
 }
