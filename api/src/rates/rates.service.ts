@@ -5,7 +5,6 @@ import { UpstreamError, UpstreamTimeoutError, UpstreamParseError } from "../erro
 
 const CNB_API_URL = 'https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing';
 
-
 export async function getDailyRates() {
     const response = await fetch(`${CNB_API_URL}/daily.txt`);
 
