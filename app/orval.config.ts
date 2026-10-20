@@ -10,7 +10,6 @@ export default defineConfig({
       target: 'src/api/gen/rates.ts',
       schemas: 'src/api/gen/models',
       client: 'fetch',
-      baseUrl: '/api',
       mock: false,
       override: {
         fetch: { includeHttpResponseReturnType: false },

@@ -3,7 +3,8 @@
   "services": {
     "api": {
       "root": "api",
-      "framework": "fastify"
+      "framework": "fastify",
+      "entrypoint": "src/app.ts"
     },
     "app": {
       "root": "app",

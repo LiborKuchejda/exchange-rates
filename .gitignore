@@ -27,3 +27,4 @@ dist-ssr
 
 # Config
 .env.local
+.env*

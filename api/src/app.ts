@@ -1,7 +1,7 @@
 import Fastify from 'fastify';
 import rateLimit from "@fastify/rate-limit";
-// import swagger from "@fastify/swagger";
-// import swaggerUi from "@fastify/swagger-ui";
+import swagger from "@fastify/swagger";
+import swaggerUi from "@fastify/swagger-ui";
 import {
   jsonSchemaTransform,
   jsonSchemaTransformObject,
@@ -23,28 +23,30 @@ app.register(rateLimit, {
   timeWindow: "1 minute",
 });
 
-// app.register(swagger, {
-//   openapi: {
-//     openapi: "3.1.1",
-//     info: {
-//       title: "Exchange Rates API",
-//       description: "Daily CNB exchange rates",
-//       version: "1.0.0",
-//     },
-//   },
-//   transform: jsonSchemaTransform,
-//   transformObject: jsonSchemaTransformObject,
-// });
+app.register(swagger, {
+  openapi: {
+    openapi: "3.1.1",
+    info: {
+      title: "Exchange Rates API",
+      description: "Daily CNB exchange rates",
+      version: "1.0.0",
+    },
+  },
+  transform: jsonSchemaTransform,
+  transformObject: jsonSchemaTransformObject,
+});
 
-// app.register(swaggerUi, {
-//   routePrefix: "/docs",
-// });
+app.register(swaggerUi, {
+  routePrefix: "/docs",
+});
 
-app.register(ratesRoutes, { prefix: "/rates/" });
+app.register(ratesRoutes, { prefix: "api/rates/" });
 
-try {
-  await app.listen({ port: Number(process.env.PORT) || 3001, host: "0.0.0.0" });
-} catch (err) {
-  app.log.error(err);
-  process.exit(1);
-}
+app.listen({ port: Number(process.env.PORT) || 3001, host: "0.0.0.0" })
+  .then(() => {
+    console.log("API routes:\n" + app.printRoutes());
+  })
+  .catch((err) => {
+    app.log.error(err);
+    process.exit(1);
+  });

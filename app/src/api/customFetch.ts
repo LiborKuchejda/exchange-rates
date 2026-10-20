@@ -11,12 +11,25 @@ export class ApiError<T = unknown> extends Error {
 
 export const customFetch = async <T>(url: string, options: RequestInit): Promise<T> => {
     const res = await fetch(url, options);
-
     const text = await res.text();
-    const body = text ? JSON.parse(text) : undefined;
+
+    let body: unknown;
+    if (text) {
+        try {
+            body = JSON.parse(text);
+        } catch {
+            console.error("customFetch: non-JSON response", {
+                url,
+                status: res.status,
+                contentType: res.headers.get("content-type"),
+                text: text.slice(0, 200),
+            });
+            throw new ApiError(res.status, { message: "Server returned non-JSON response" });
+        }
+    }
 
     if (!res.ok) {
-        console.error("customFetch:", { status: res.status, text });
+        console.error("customFetch:", { status: res.status, body });
         throw new ApiError(res.status, body);
     }
 
