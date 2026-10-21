@@ -92,7 +92,6 @@ export default createGlobalStyle`
     --font-size-md: 1rem;
     --font-size-lg: 1.5rem;
     --font-size-xlg: 3rem;
-
   }
   
 `;

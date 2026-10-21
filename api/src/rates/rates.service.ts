@@ -15,7 +15,7 @@ export async function getDailyRates() {
     return parseDailyRates(await response.text());
 }
 
-function parseDailyRates(text: string): DailyRates {
+export function parseDailyRates(text: string): DailyRates {
     const [firstLine, headerLine, ...dataLines] = text.trim().split(/\r?\n/);
 
     if (!firstLine || !headerLine?.startsWith("Country|Currency|Amount|Code|Rate")) {
