@@ -50,9 +50,10 @@ export function CurrencyConverter() {
 
   const rate = rates.find((r) => r.currencyCode === code) ?? rates[0];
   const result = amountSchema.safeParse(conversion.amountText);
-  const error = result.success ? undefined : result.error.issues[0].message;
-  const foreignValue = conversion.source === "foreign" ? conversion.amountText : formatCurrency(toForeign(result.data, rate));
-  const czkValue = conversion.source === "czk" ? conversion.amountText : formatCurrency(toCzk(result.data, rate));
+  const amount = result.success ? result.data : NaN;
+  const errorMessage = result.success ? undefined : result.error.issues[0]?.message;
+  const foreignValue = conversion.source === "foreign" ? conversion.amountText : formatCurrency(toForeign(amount, rate));
+  const czkValue = conversion.source === "czk" ? conversion.amountText : formatCurrency(toCzk(amount, rate));
 
   return (
     <Wrapper>
@@ -62,7 +63,7 @@ export function CurrencyConverter() {
             aria-label="Foreign amount"
             inputMode="decimal"
             value={foreignValue}
-            aria-invalid={conversion.source === "foreign" && !result.success}
+            aria-invalid={conversion.source === "foreign" && !!errorMessage}
             onChange={(e) => setConversion({ source: "foreign", amountText: e.target.value })}
           />
           <Select
@@ -83,14 +84,14 @@ export function CurrencyConverter() {
             aria-label="CZK amount"
             inputMode="decimal"
             value={czkValue}
-            aria-invalid={conversion.source === "czk" && !result.success}
+            aria-invalid={conversion.source === "czk" && !!errorMessage}
             onChange={(e) => setConversion({ source: "czk", amountText: e.target.value })}
           />
           <Code>CZK</Code>
         </InputPanel>
       </ActionBanner>
 
-      {error && <ErrorText role="alert">{error}</ErrorText>}
+      {errorMessage && <ErrorText role="alert">{errorMessage}</ErrorText>}
     </Wrapper>
   );
 }
