@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { RatesList } from "../components/RatesList";
-import { getDailyRates } from "../api/gen";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { CurrencyConverter } from "../components/CurrencyConverter";
+import { useDailyRates } from "../hooks/useDailyRates";
 
 const Wrapper = styled.section`
     display: flex;
@@ -22,7 +22,7 @@ const Description = styled.p`
 `;
 
 export function DailyExchangeRates() {
-    const { data } = useSuspenseQuery({ queryKey: ["rates"], queryFn: getDailyRates });
+    const { data } = useDailyRates();
     const date = data.date;
     return (
         <Wrapper>
@@ -32,6 +32,7 @@ export function DailyExchangeRates() {
                     Czech national bank daily exchange rates against the Czech koruna (CZK).
                 </Description>
             </header>
+            <CurrencyConverter />
             <RatesList />
         </Wrapper>
     );

@@ -1,6 +1,5 @@
-import { useSuspenseQuery } from "@tanstack/react-query"
 import styled from "styled-components";
-import { getDailyRates } from "../api/gen";
+import { useDailyRates } from "../hooks/useDailyRates";
 
 const Rate = styled.div`
   display: flex;
@@ -112,7 +111,7 @@ const ColumnHeading = styled.span`
   }
 `;
 export function RatesList() {
-    const { data } = useSuspenseQuery({ queryKey: ["rates"], queryFn: getDailyRates });
+    const { data } = useDailyRates();
 
     return (
         <>
