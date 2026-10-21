@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { RatesList } from "../components/RatesList";
 import { CurrencyConverter } from "../components/CurrencyConverter";
-import { useDailyRates } from "../hooks/useDailyRates";
+import { useDailyRates } from "../hooksAndUtils/useDailyRates";
 
 const Wrapper = styled.section`
     display: flex;

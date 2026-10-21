@@ -1,13 +1,15 @@
-import type { FallbackProps } from "./ErrorBoundary";
 import styled from "styled-components";
+import type { FallbackProps } from "react-error-boundary";
+import { LinkButton } from "./UX";
 
-function ErrorFallback({ error }: FallbackProps) {
+export function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
+  const message = error instanceof Error ? error.message : String(error);
 
-  const message = error.message;
   return (
     <CenteredContainer role="alert">
       <p>Oops!</p>
       <pre>{message}</pre>
+      <LinkButton onClick={() => resetErrorBoundary()}>re-try</LinkButton>
     </CenteredContainer>
   );
 }

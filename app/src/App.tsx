@@ -1,8 +1,11 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import ErrorBoundary from "./components/ErrorBoundary"
-import ErrorFallback from "./components/ErrorFallback"
 import { Suspense } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { ErrorBoundary } from "react-error-boundary";
+import { QueryErrorResetBoundary } from '@tanstack/react-query'
+import { logError } from "./hooksAndUtils/logError";
+import ErrorFallback from "./components/ErrorFallback"
 import PageContainer from "./components/PageContainer";
+import { Spinner } from "./components/UX";
 import { DailyExchangeRates } from "./pages/DailyExchangeRates";
 
 const queryClient = new QueryClient();
@@ -11,15 +14,24 @@ function App() {
 
   return (
     <PageContainer>
-      <ErrorBoundary fallbackComponent={ErrorFallback}>
-        <QueryClientProvider client={queryClient}>
-          <section>
-            <Suspense fallback={<h1>Loading...</h1>}>
-              <DailyExchangeRates />
-            </Suspense>
-          </section>
-        </QueryClientProvider>
-      </ErrorBoundary>
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary
+            onReset={reset}
+            FallbackComponent={ErrorFallback}
+            onError={logError}
+          >
+            <QueryClientProvider client={queryClient}>
+              <section>
+                <Suspense fallback={<Spinner />}>
+                  <DailyExchangeRates />
+                </Suspense>
+              </section>
+            </QueryClientProvider>
+          </ErrorBoundary>
+        )}
+
+      </QueryErrorResetBoundary>
     </PageContainer>
   )
 }

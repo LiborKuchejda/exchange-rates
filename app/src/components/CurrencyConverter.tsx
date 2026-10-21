@@ -2,8 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import { z } from "zod";
 import { ActionBanner, ErrorText, Input, Select } from "./UX";
-import { useDailyRates } from "../hooks/useDailyRates";
-import { formatCurrency, toCzk, toForeign } from "../hooks/conversion";
+import { useDailyRates } from "../hooksAndUtils/useDailyRates";
+import { formatCurrency, toCzk, toForeign } from "../hooksAndUtils/conversion";
 
 const amountSchema = z
   .string()

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useDailyRates } from "../hooks/useDailyRates";
+import { useDailyRates } from "../hooksAndUtils/useDailyRates";
 
 const Rate = styled.div`
   display: flex;
