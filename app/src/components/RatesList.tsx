@@ -111,41 +111,41 @@ const ColumnHeading = styled.span`
   }
 `;
 export function RatesList() {
-    const { data } = useDailyRates();
+  const { data } = useDailyRates();
 
-    return (
-        <>
-            <ListHeader aria-hidden="true">
-                <ColumnHeading>Currency</ColumnHeading>
-                <ColumnHeading>Country</ColumnHeading>
-                <ColumnHeading>Amount</ColumnHeading>
-                <ColumnHeading>Exchange rate</ColumnHeading>
-            </ListHeader>
+  return (
+    <>
+      <ListHeader aria-hidden="true">
+        <ColumnHeading>Currency</ColumnHeading>
+        <ColumnHeading>Country</ColumnHeading>
+        <ColumnHeading>Amount</ColumnHeading>
+        <ColumnHeading>Exchange rate</ColumnHeading>
+      </ListHeader>
 
-            <List aria-label="Daily exchange rates">
-                {data.rates.map((rate) => (
-                    <Item key={rate.currencyCode}>
-                        <Currency>
-                            <CurrencyCode>{rate.currencyCode}</CurrencyCode>
-                            <CurrencyDescription>
-                                {rate.country} / {rate.currency}
-                            </CurrencyDescription>
-                        </Currency>
+      <List aria-label="Daily exchange rates">
+        {data.rates.map((rate) => (
+          <Item key={rate.currencyCode}>
+            <Currency>
+              <CurrencyCode>{rate.currencyCode}</CurrencyCode>
+              <CurrencyDescription>
+                {rate.country} / {rate.currency}
+              </CurrencyDescription>
+            </Currency>
 
-                        <Country>{rate.country}</Country>
+            <Country>{rate.country}</Country>
 
-                        <Amount>{rate.amount}</Amount>
+            <Amount>{rate.amount}</Amount>
 
-                        <Rate>
-                            <RateValue>{rate.rate}</RateValue>
-                            <AmountExplaination>
-                                CZK / {rate.amount} {rate.currencyCode}
-                            </AmountExplaination>
-                        </Rate>
-                    </Item>
-                ))}
-            </List>
-        </>
-    );
+            <Rate>
+              <RateValue>{rate.rate}</RateValue>
+              <AmountExplaination>
+                CZK / {rate.amount} {rate.currencyCode}
+              </AmountExplaination>
+            </Rate>
+          </Item>
+        ))}
+      </List>
+    </>
+  );
 
 }

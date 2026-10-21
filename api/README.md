@@ -1,4 +1,6 @@
-# API to wrap CNB daily rates
+# Why
+
+It is API to wrap CNB daily rates
 
 [daily.txt]( https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/daily.txt )
 
@@ -6,20 +8,20 @@
 > and why not to convert it to JSON and ISO date 
 
 
-## To develop locally:
+# Development
 
 ```
 npm install
 npm run dev
 ```
 
-To get daily rates:
+To check it and get daily rates:
 
 ```
 curl localhost:3001/api/rates/daily
 ```
 
-## Testing
+# Testing
 
 Tests use [Vitest](https://vitest.dev) and mock `fetch`, so no network is needed.
 

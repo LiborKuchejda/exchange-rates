@@ -38,6 +38,7 @@ const Code = styled.div`
 
 export function CurrencyConverter() {
   const { data: { rates } } = useDailyRates();
+  
   const [code, setCode] = useState("EUR");
   const [conversion, setConversion] = useState<{ source: "czk" | "foreign"; amountText: string }>({
     source: "foreign",

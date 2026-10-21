@@ -21,7 +21,7 @@ const CenteredContainer = styled.div`
   justify-content: center;
   height: 100vh;
   p {
-    font-size: xxx-large;
+    font-size: var(--font-size-xlg);
     font-weight: 900;
     color: var(--color-light-gray);
   }
