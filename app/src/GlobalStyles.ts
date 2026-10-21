@@ -86,6 +86,12 @@ export default createGlobalStyle`
     --color-light-text: hsl(240, 3.83%, 46.08%);
     --color-dark-gray: hsl(170, 0%, 38%);
     --color-light-gray: hsl(170, 0%, 86%);
+    
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.5rem;
+    --font-size-xlg: 3rem;
+
   }
   
 `;
