@@ -1,5 +1,6 @@
 import type { ErrorInfo } from "react";
 
-export function logError(error: Error, info: ErrorInfo) {
-  console.error("Oops! Error:", error.message, info.componentStack);
+export function logError(error: unknown, info: ErrorInfo) {
+  const message = error instanceof Error ? error.message : String(error);
+  console.error("Oops! Error:", message, info.componentStack);
 }
